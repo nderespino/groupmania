@@ -1,1 +1,24 @@
+.App-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
+
+  .header-container {
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+
+  #basic-nav-dropdown {
+    padding-right: 3em;
+  }
+
+  .custom-dropdown-item {
+    padding: 10px 20px; /* Adjust padding as needed */
+  }
