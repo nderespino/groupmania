@@ -1,10 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import PostComp from './PostComp';
 
 function BasicExample() {
   return (
     <Card className='mb-3' style={{ width: '18rem'}}>
-      <Card.Img variant="top" src="https://picsum.photos/seed/picsum/200/100" />
+      <Card.Img variant="top" src="" />
       <Card.Body>
         <Card.Title>Card Title</Card.Title>
         <Card.Text>
