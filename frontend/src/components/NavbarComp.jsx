@@ -1,8 +1,9 @@
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+import PostComp from './PostComp';
 
-function BasicExample() {
+function NavigationBar() {
 
 
   return (
@@ -13,7 +14,9 @@ function BasicExample() {
         <Nav className="me-auto">
           <Nav.Link href="#home">Home</Nav.Link>
           <Nav.Link href="#link">Profile</Nav.Link>
+          <PostComp/>
         </Nav>
+        
         <Nav>
           <NavDropdown title="Profile" id="basic-nav-dropdown" className="dropdown-menu-right">
             <NavDropdown.Item href="#action/3.1" className= "custom-dropdown-item">Settings</NavDropdown.Item>
@@ -26,4 +29,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default NavigationBar;

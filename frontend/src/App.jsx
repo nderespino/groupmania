@@ -1,5 +1,6 @@
 import NavbarComp from './components/NavbarComp';
 import CardComp from './components/CardComp';
+import PostComp from './components/PostComp';
 import './App.css';
 import {Button, Alert, Breadcrumb, Form} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,20 +12,8 @@ function App() {
       <NavbarComp/>
       </header>
       <container className = "App-container">
+        <PostComp/>
      <CardComp/>
-     <Form>
-      <Form.Group>
-        <Form.Label>Email Address</Form.Label>
-        <Form.Control type = 'email' placeholder="email@email.com"></Form.Control>
-      </Form.Group>
-     </Form>
-     <Breadcrumb>
-     <Breadcrumb.Item>Test 1</Breadcrumb.Item>
-     <Breadcrumb.Item>Test 2</Breadcrumb.Item>
-     <Breadcrumb.Item active>Test 3</Breadcrumb.Item>
-     </Breadcrumb>
-     <Alert variant ="success">this is a button</Alert>
-     <Button>Test Button</Button>
      </container>
     </div>
   )
