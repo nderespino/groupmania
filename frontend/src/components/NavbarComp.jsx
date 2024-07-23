@@ -1,7 +1,9 @@
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import PostComp from './PostComp';
+import {Col, Container, Image} from 'react-bootstrap';
+
+
 
 function NavigationBar() {
 
@@ -14,10 +16,10 @@ function NavigationBar() {
         <Nav className="me-auto">
           <Nav.Link href="#home">Home</Nav.Link>
           <Nav.Link href="#link">Profile</Nav.Link>
-          <PostComp/>
         </Nav>
         
         <Nav>
+        <Image className='profile-picture' src="https://picsum.photos/id/237/50/" roundedCircle />
           <NavDropdown title="Profile" id="basic-nav-dropdown" className="dropdown-menu-right">
             <NavDropdown.Item href="#action/3.1" className= "custom-dropdown-item">Settings</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2"className= "custom-dropdown-item">Log Out</NavDropdown.Item>

@@ -2,7 +2,6 @@ import NavbarComp from './components/NavbarComp';
 import CardComp from './components/CardComp';
 import PostComp from './components/PostComp';
 import './App.css';
-import {Button, Alert, Breadcrumb, Form} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -12,7 +11,7 @@ function App() {
       <NavbarComp/>
       </header>
       <container className = "App-container">
-        <PostComp/>
+      <PostComp/>
      <CardComp/>
      </container>
     </div>
