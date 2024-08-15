@@ -1,7 +1,7 @@
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import {Col, Container, Image} from 'react-bootstrap';
+import { Image} from 'react-bootstrap';
 
 
 

@@ -3,6 +3,8 @@ import CardComp from './components/CardComp';
 import PostComp from './components/PostComp';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
+
 
 function App() {
   return (
@@ -10,10 +12,10 @@ function App() {
       <header className = "header-container">
       <NavbarComp/>
       </header>
-      <container className = "App-container">
+      <Container className = "App-container">
       <PostComp/>
      <CardComp/>
-     </container>
+     </Container>
     </div>
   )
 }

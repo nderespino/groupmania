@@ -1,11 +1,11 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const multer = require('multer');
 const User = require('./models/User');
 const Post = require('./models/Post');
+const cors = require('cors');
 
 const app = express();
-
+app.use(cors());
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/');
@@ -16,6 +16,20 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+app.get('/posts', async (req, res) => {
+  console.log("1");
+  try {
+    console.log("2");
+    const posts = await Post.findAll();
+    console.log("3");
+    res.status(200).json(posts);
+  } catch (error) {
+    console.log("4");
+    console.error('Error fetching posts:', error);
+    res.status(500).json({ error: 'An error occurred while fetching posts' });
+  }
+});
 
 app.post('/create-post', upload.single('file'), async (req, res) => {
   try {
@@ -35,6 +49,6 @@ app.post('/create-post', upload.single('file'), async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+// Route to get all posts
+
+
