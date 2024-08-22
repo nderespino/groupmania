@@ -21,10 +21,11 @@ export default function App() {
     console.log('1');
     fetchPosts();
   }, []);
-
+ 
   return (
-    <Container className="d-flex flex-column align-items-center mt-4">
+    <Container className="d-flex flex-column align-items-center">
       {posts.map((post) => (
+        
         <Card key={post.id} style={{ maxWidth: "42rem", marginBottom: "20px" }}>
           <Card.Body>
             <div className="d-flex mb-3">
@@ -38,7 +39,7 @@ export default function App() {
               </a>
               <div>
                 <a href="#!" className="text-dark mb-0">
-                  <strong>{post.username}</strong>
+                  <strong>{post.user_id}</strong>
                 </a>
                 <a
                   href="#!"
@@ -53,7 +54,9 @@ export default function App() {
               <p>{post.content}</p> {/* Display post content */}
             </div>
           </Card.Body>
-          {post.image_url && (  // Only render the image section if an image exists
+          {post.image_url && ( 
+            <>
+             {console.log('Image URL:', post.image_url)} 
             <div className="bg-image hover-overlay ripple rounded-0">
               <Card.Img
                 src={post.image_url}  // Display the post image
@@ -66,6 +69,7 @@ export default function App() {
                 ></div>
               </a>
             </div>
+            </>
           )}
           <Card.Body>
             <div className="d-flex justify-content-between mb-3">
@@ -78,7 +82,10 @@ export default function App() {
             </div>
           </Card.Body>
         </Card>
+         
       ))}
     </Container>
+     
   );
+ 
 }

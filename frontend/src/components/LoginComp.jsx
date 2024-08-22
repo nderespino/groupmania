@@ -1,14 +1,43 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Log the login attempt with the entered credentials
     console.log('Login attempted with:', { email, password });
-    // Here you would typically send a request to your server
+
+    try {
+      // Send a POST request to the login endpoint
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      // Parse the JSON response from the server
+      const data = await response.json();
+
+      if (response.ok) {
+        // Handle successful login (e.g., store token, redirect)
+        console.log('Login successful:', data);
+        // You can redirect the user or store the token here
+      } else {
+        // Handle login failure (e.g., show error message)
+        console.error('Login failed:', data.message);
+        // You can display an error message to the user here
+      }
+    } catch (error) {
+      // Handle errors (e.g., network issues)
+      console.error('Error during login:', error);
+      // You can display a generic error message here
+    }
   };
 
   return (

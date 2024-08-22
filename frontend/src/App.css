@@ -23,5 +23,13 @@
     padding: 10px 20px; /* Adjust padding as needed */
   }
 
+.d-flex {
+ gap: 20px;
+ margin-top: 2rem; /* Add margin between cards */
+  margin-bottom: 1rem;
+  max-height: 100vh; /* Ensure content stays within viewport height */
+}
+
+
 
  

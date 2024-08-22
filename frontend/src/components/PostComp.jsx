@@ -21,7 +21,7 @@ function CreatePost() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/create-post', {
+      const response = await fetch('http://localhost:3000/posts', {
         method: 'POST',
         body: formData,
       });
@@ -39,9 +39,11 @@ function CreatePost() {
 
   return (
     <>
+    <div className='new-post-button'>
       <Button variant="primary" onClick={handleShow}>
         New Post
       </Button>
+      </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
