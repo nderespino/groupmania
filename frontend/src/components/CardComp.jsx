@@ -21,7 +21,7 @@ export default function App() {
     console.log('1');
     fetchPosts();
   }, []);
- 
+  console.log('Image URL:', posts);
   return (
     <Container className="d-flex flex-column align-items-center">
       {posts.map((post) => (
@@ -56,10 +56,10 @@ export default function App() {
           </Card.Body>
           {post.image_url && ( 
             <>
-             {console.log('Image URL:', post.image_url)} 
+              
             <div className="bg-image hover-overlay ripple rounded-0">
               <Card.Img
-                src={post.image_url}  // Display the post image
+                src={`//localhost:3000/uploads/${post.image_url}`} // Display the post image
                 className="w-100"
               />
               <a href="#!">

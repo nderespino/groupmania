@@ -8,9 +8,9 @@ console.log('JWT_SECRET:', JWT_SECRET);
 
 
 module.exports.signup = (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
+  const { email, password, username } = req.body;
+console.log(req.body);
+  if (!email || !password || !username) {
     return res.status(400).json({ message: "credentials not valid" });
   }
 
@@ -27,7 +27,7 @@ module.exports.signup = (req, res) => {
           .status(500)
           .json({ message: "something went wrong with creating a new user" });
       }
-      const user = new User({ email, password: hash, salt });
+      const user = new User({ email, password: hash, salt, username });
       user
         .save()
         .then(() => {
@@ -44,15 +44,13 @@ module.exports.signup = (req, res) => {
 };
 
 module.exports.login = (req, res) => {
-  const {email, password} = req.body;
+  const { username, password } = req.body;
 
-  if (!email || !password) {
-    return res
-      .status(400)
-      .json({ message: "username or password not present" });
+  if (!username || !password) {
+    return res.status(400).json({ message: "Username or password not present" });
   }
 
-  User.findOne({email})
+  User.findOne({ where: { username } })  // Corrected syntax
     .then((user) => {
       if (!user) {
         return res.status(500).json({ message: "Login not successful" });
@@ -60,24 +58,19 @@ module.exports.login = (req, res) => {
 
       bcrypt.compare(password, user.password, (err, match) => {
         if (err) {
-          return res
-            .status(500)
-            .json({ message: "Something went wrong with Bcrypt comparison" });
+          return res.status(500).json({ message: "Something went wrong with Bcrypt comparison" });
         }
 
-
         if (match) {
-          const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+          const token = jwt.sign({ userId: user.id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
           return res.status(200).json({ message: "Login successful", userId: user.id, token });
         } else {
-          return res.status(401).json({ message: "Invalid email or password" });
+          return res.status(401).json({ message: "Invalid username or password" });
         }
       });
     })
     .catch((e) => {
-      res
-        .status(500)
-        .json({ message: "Something went wrong with finding the user" });
+      res.status(500).json({ message: "Something went wrong with finding the user" });
       console.log("error", e);
     });
 };

@@ -18,7 +18,7 @@ router.post('/', upload.single('file'), async (req, res) => {
       const post = await Post.create({
         user_id: 1, // Replace with actual user ID
         content,
-        image_url: file ? file.path : null,
+        image_url: file ? file.filename : null,
       });
   
       res.status(201).json(post);

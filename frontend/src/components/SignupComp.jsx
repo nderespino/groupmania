@@ -1,26 +1,47 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Simple client-side validation
-    if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match');
-      return;
-    }
-
     setErrorMessage('');
-    console.log('Signup attempted with:', { username, email, password });
+    setSuccessMessage('');
 
-    // Here you would typically send a request to your server
+    try {
+      const response = await fetch('http://localhost:3000/signup', {
+        method: 'POST',
+        body: JSON.stringify({ username, email, password }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setSuccessMessage('Signup successful!');
+        console.log('Signup successful:', result);
+        
+        // Redirect to the home page after successful signup
+        navigate('/'); // Adjust the path according to your routing setup
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || 'Failed to sign up');
+        console.error('Signup error:', errorData);
+      }
+    } catch (error) {
+      setErrorMessage('An error occurred. Please try again.');
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -62,20 +83,15 @@ function Signup() {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formConfirmPassword">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-            </Form.Group>
-
             {errorMessage && (
               <div className="text-danger mb-3">
                 {errorMessage}
+              </div>
+            )}
+            
+            {successMessage && (
+              <div className="text-success mb-3">
+                {successMessage}
               </div>
             )}
 

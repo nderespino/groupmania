@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Log the login attempt with the entered credentials
-    console.log('Login attempted with:', { email, password });
+    console.log('Login attempted with:', { username, password });
 
     try {
       // Send a POST request to the login endpoint
@@ -18,25 +20,25 @@ function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       // Parse the JSON response from the server
       const data = await response.json();
 
       if (response.ok) {
-        // Handle successful login (e.g., store token, redirect)
+        // Handle successful login
         console.log('Login successful:', data);
-        // You can redirect the user or store the token here
+        
+        // Redirect to the home page after successful login
+        navigate('/'); // Adjust the path according to your routing setup
       } else {
-        // Handle login failure (e.g., show error message)
+        // Handle login failure
         console.error('Login failed:', data.message);
-        // You can display an error message to the user here
       }
     } catch (error) {
       // Handle errors (e.g., network issues)
       console.error('Error during login:', error);
-      // You can display a generic error message here
     }
   };
 
@@ -46,13 +48,13 @@ function Login() {
         <Col xs={12} md={6}>
           <h2 className="text-center mb-4">Login</h2>
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+            <Form.Group className="mb-3" controlId="formBasicUsername">
+              <Form.Label>Username</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                placeholder="Enter username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </Form.Group>
 

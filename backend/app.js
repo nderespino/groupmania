@@ -8,7 +8,8 @@ app.use(cors());
 const postRouter = require('./routes/posts');
 const userRouter = require('./routes/user')
 app.use('/posts', postRouter);
-app.use('/signup', userRouter);
+app.use('/', userRouter);
+app.use('/uploads', express.static('uploads'))
 
 module.exports = app;
 

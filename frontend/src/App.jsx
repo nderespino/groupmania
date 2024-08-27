@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavbarComp from "./components/NavbarComp";
 import CardComp from "./components/CardComp";
-import PostComp from "./components/PostComp";
 import LoginComp from "./components/LoginComp";
 import SignupComp from "./components/SignupComp";
 
